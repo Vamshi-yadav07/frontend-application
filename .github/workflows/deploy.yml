@@ -23,4 +23,16 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.ACR_LOGIN_SERVER }}/frontend-application:latest
+          tags: ${{ secrets.ACR_LOGIN_SERVER }}/frontend-application:${{ github.sha }}
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy to Container App
+        uses: azure/container-apps-deploy-action@v2
+        with:
+          containerAppName: your-container-app
+          resourceGroup: your-resource-group
+          imageToDeploy: ${{ secrets.ACR_LOGIN_SERVER }}/frontend-application:${{ github.sha }}
