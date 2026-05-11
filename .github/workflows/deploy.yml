@@ -19,7 +19,8 @@ jobs:
           password: ${{ secrets.ACR_PASSWORD }}
 
       - name: Build and Push
-        run: |
-          docker build \
-            --build-arg \
-            -t ${{ secrets.ACR_LOGIN_SERVER }}/frontend-application:latest .
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.ACR_LOGIN_SERVER }}/frontend-application:latest
