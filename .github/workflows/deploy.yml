@@ -33,6 +33,6 @@ jobs:
       - name: Deploy to Container App
         uses: azure/container-apps-deploy-action@v2
         with:
-          containerAppName: your-container-app
-          resourceGroup: your-resource-group
+          containerAppName: frontend-application
+          resourceGroup: frontend-application
           imageToDeploy: ${{ secrets.ACR_LOGIN_SERVER }}/frontend-application:${{ github.sha }}
